@@ -1,80 +1,26 @@
-"use strict";
+/* Задания на урок:
 
+1) Удалить все рекламные блоки со страницы (правая часть сайта)
 
-const personalMovieDb = {
-    count: +'',
-    movies: {},
-    actors: {},
-    genres: [],
-    private: false,
-    personalLevel: '',
-    start: function () {
-        this.count = +prompt("Сколько фильмов вы уже посмотрели?", "");
+2) Изменить жанр фильма, поменять "комедия" на "драма"
 
-        while (this.count == '' || this.count == null || isNaN(this.count)) {
-            this.count = +prompt("Сколько фильмов вы уже посмотрели?", "");
-        }
-    },
-    rememberMyFilms: function () {
-        for (let i = 1; i <= this.count; i++) {
+3) Изменить задний фон постера с фильмом на изображение "bg.jpg". Оно лежит в папке img.
+Реализовать только при помощи JS
 
-            let answerHowFilmIsWatched,
-                answerFilmsNote;
+4) Список фильмов на странице сформировать на основании данных из этого JS файла.
+Отсортировать их по алфавиту 
 
-            answerHowFilmIsWatched = prompt(`Как называется фильм №${i}?`, '');
+5) Добавить нумерацию выведенных фильмов */
 
-            if (answerHowFilmIsWatched == null || 
-                answerHowFilmIsWatched.length == 0 || 
-                answerHowFilmIsWatched.length > 50) {
-                i--;
-                continue;
-            }
+'use strict';
 
-            answerFilmsNote = prompt(`Оцените фильм №${i}`, '');
-
-            this.movies[answerHowFilmIsWatched] = answerFilmsNote;
-        }
-    },
-    detectPersonalLevel: function () {
-        if (this.count > 30) {
-            this.personalLevel = 'Вы киноман';
-        } else if (this.count > 10) {
-            this.personalLevel = 'Вы классический зритель';
-        } else if (this.count <= 10) {
-            this.personalLevel = 'Просмотрено довольно мало фильмов';
-        } else {
-            this.personalLevel = 'Ошибка';
-        }
-    },
-    showMyDB: function () {
-        if (this.private) {
-            console.log('Внимание, нет прав для просмотра объекта');
-        } else {
-            console.log(this);
-        }
-    },
-    writeYourGenres: function () {
-        for (let i = 0; i < 3; i++) {
-            let tmpGenres = prompt(`Ваш любимый жанр под номером ${i+1}?`, '');
-            if(tmpGenres == null || tmpGenres =='' || tmpGenres.isNaN){
-                i--;
-                continue;
-            }
-            this.genres[i] = tmpGenres;
-        }
-        this.genres.forEach(function(item, index){
-            console.log(`Любимый жанр №${index+1} - это ${item}`);
-        });
-    },
-    toggleVisibleMyDB: function(){
-        this.private = !this.private;
-    }
+const movieDB = {
+    movies: [
+        "Логан",
+        "Лига справедливости",
+        "Ла-ла лэнд",
+        "Одержимость",
+        "Скотт Пилигрим против..."
+    ]
 };
 
-personalMovieDb.start();
-personalMovieDb.rememberMyFilms();
-personalMovieDb.writeYourGenres();
-personalMovieDb.detectPersonalLevel();
-personalMovieDb.showMyDB();
-personalMovieDb.toggleVisibleMyDB();
-personalMovieDb.showMyDB();
