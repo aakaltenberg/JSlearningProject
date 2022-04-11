@@ -1,4 +1,6 @@
 window.addEventListener('DOMContentLoaded', () => {
+    
+    //#region tabs
     const tabs = document.querySelectorAll('.tabheader__item'),
           tabsContent = document.querySelectorAll('.tabcontent'),
           tabsParent = document.querySelector('.tabheader__items');
@@ -33,14 +35,16 @@ window.addEventListener('DOMContentLoaded', () => {
             });
         }
     });
+    //#endregion
 
+    //#region Time
     const deadline = '2022-04-12';
     
     function getTimeRemaining(endtime){
         const timeDifferent = Date.parse(endtime) - Date.parse(new Date()),
               days = Math.floor(timeDifferent / (1000 * 60 * 60 * 24)),
-              hours = Math.floor((timeDifferent / (1000*60*60)) % 24),
               minutes = Math.floor((timeDifferent / (1000 * 60)) % 60),
+              hours = Math.floor((timeDifferent / (1000*60*60)) % 24),
               seconds = Math.floor((timeDifferent / 1000) % 60);
     
         return {
@@ -85,4 +89,41 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     setClock('.timer', deadline);
+    //#endregion
+
+    //#region modal
+    
+    const modalTrigger = document.querySelectorAll('[data-modal]'),
+          modal = document.querySelector('.modal'),
+          modalCloseBtn = document.querySelector('[data-close]');
+
+    modalTrigger.forEach(btn =>{
+        btn.addEventListener('click', () =>{
+                modal.classList.add('show');
+                modal.classList.remove('hide');
+                document.body.style.overflow = 'hidden';
+            });
+    });
+
+    function closeModal(){
+        modal.classList.add('hide');
+        modal.classList.remove('show');
+        document.body.style.overflow = '';
+    }
+
+    modalCloseBtn.addEventListener('click', closeModal);
+
+
+    modal.addEventListener('click', (e) => {
+        if(e.target === modal){
+            closeModal();
+        }
+    });
+
+    document.addEventListener('keydown', (e) =>{
+        if(e.code === "Escape" && modal.classList.contains('show')){
+            closeModal();
+        }
+    });
+    //#endregion
 });
