@@ -38,7 +38,7 @@ window.addEventListener('DOMContentLoaded', () => {
     //#endregion
 
     //#region Time
-    const deadline = '2022-04-12';
+    const deadline = '2022-04-13';
     
     function getTimeRemaining(endtime){
         const timeDifferent = Date.parse(endtime) - Date.parse(new Date()),
@@ -130,7 +130,7 @@ window.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    const modalTimerId = setTimeout(openModal, 5000);
+    // const modalTimerId = setTimeout(openModal, 5000);
     
     function showModalByScroll(){
         if(window.pageYOffset + document.documentElement
@@ -141,5 +141,40 @@ window.addEventListener('DOMContentLoaded', () => {
     }
 
     window.addEventListener('scroll', showModalByScroll);
+    //#endregion
+
+    //#region Classes for cards
+
+    class MenuCard{
+        constructor(src, alt, title, descr, price, parentSelector){
+            this.src = src;
+            this.alt = alt;
+            this.title = title;
+            this.descr = descr;
+            this.price = price;
+            this.transfer = 27;
+        }
+
+        changeToUAH(){
+            this.price = this.price * this.transfer;
+        }
+
+        render() {
+            const element = document.createElement('div');
+            element.innerHTML = `
+                <div class="menu__item">
+                    <img src="${this.src}" alt="${this.alt}">
+                    <h3 class="menu__item-subtitle">Меню "Фитнес"</h3>
+                    <div class="menu__item-descr">Меню "Фитнес" - это новый подход к приготовлению блюд: больше свежих овощей и фруктов. Продукт активных и здоровых людей. Это абсолютно новый продукт с оптимальной ценой и высоким качеством!</div>
+                    <div class="menu__item-divider"></div>
+                    <div class="menu__item-price">
+                        <div class="menu__item-cost">Цена:</div>
+                        <div class="menu__item-total"><span>229</span> грн/день</div>
+                    </div>
+                </div>
+            `;
+        }
+    }
+
     //#endregion
 });
